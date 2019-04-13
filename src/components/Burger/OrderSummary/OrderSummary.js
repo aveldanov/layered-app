@@ -1,5 +1,5 @@
 import React from 'react'
-import Aux from '../../hoc/Aux'
+import Aux from '../../../hoc/Aux'
 const OrderSummary = (props) => {
   const ingredientsSummary = Object.keys(props.ingredients)
     .map((igKey) => {
@@ -17,6 +17,8 @@ const OrderSummary = (props) => {
         {ingredientsSummary}
       </ul>
       <p>Continue to check-out</p>
+      <button>CANCEL</button>
+      <button>CONTINUE</button>
     </Aux>
   )
 }
