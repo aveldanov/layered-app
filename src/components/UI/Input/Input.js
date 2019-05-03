@@ -1,18 +1,22 @@
-import React from 'react'
+import React from 'react';
+import classes from './Input.css';
 
 const Input = (props) => {
   let inputElement = null;
   switch (props.inputType) {
-    case ('input'): inputElement = <input {...props} />;
+    case ('input'): inputElement = <input
+      className={classes.InputElement}
+      {...props} />;
       break;
-    case ('textarea'): inputElement = <textarea {...props} />
+    case ('textarea'): inputElement = <textarea className={classes.InputElement}{...props} />
       break;
     default:
-      inputElement = <input {...props} />;
+      inputElement = <input className={classes.InputElement}
+        {...props} />;
   }
   return (
-    <div>
-      <label htmlFor="">
+    <div className={classes.Input}>
+      <label className={classes.Label}>
         {props.label}
       </label>
       {inputElement}
