@@ -66,7 +66,6 @@ class ContactData extends Component {
       form = <Spinner />
     }
 
-
     return (
       <div className={classes.ContactData}>
         <h4>Enter your contact data</h4>
