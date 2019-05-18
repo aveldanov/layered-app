@@ -10,11 +10,18 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/Actions';
 
-
+// const INGREDIENT_PRICES = {
+//   salad: 0.5,
+//   cheese: 0.4,
+//   meat: 1.3,
+//   bacon: 0.7
+// }
 
 class BurgerBuilder extends Component {
   state = {
-
+    // ingredients: null,
+    // totalPrice: 4,
+    // purchasable: false,
     purchasing: false,
     loading: false,
     error: false
@@ -22,10 +29,12 @@ class BurgerBuilder extends Component {
 
 
   componentDidMount = () => {
+    // console.log(this.props);
 
 
     axios.get('https://layered-app.firebaseio.com/ingredients.json')
       .then(res => {
+        // console.log(res);
 
         this.setState({
           ingredients: res.data
@@ -43,7 +52,9 @@ class BurgerBuilder extends Component {
 
 
   updatePurchaseState = (ingredients) => {
-
+    // const ingredients = {
+    //   ...this.state.ingredients
+    // }
 
     const sum = Object.keys(ingredients)
 
@@ -59,6 +70,45 @@ class BurgerBuilder extends Component {
   }
 
 
+  // addIngredientHandler = (type) => {
+  //   const oldCount = this.state.ingredients[type];
+  //   const updatedCount = oldCount + 1;
+  //   const updatedIngredients = {
+  //     ...this.state.ingredients
+  //   }
+  //   updatedIngredients[type] = updatedCount;
+  //   const priceAddition = INGREDIENT_PRICES[type];
+  //   const oldPrice = this.state.totalPrice;
+  //   const newPrice = oldPrice + priceAddition;
+  //   this.setState({
+  //     totalPrice: newPrice,
+  //     ingredients: updatedIngredients
+  //   })
+  //   this.updatePurchaseState(updatedIngredients);
+  // }
+
+  // removeIngredientHandler = (type) => {
+  //   const oldCount = this.state.ingredients[type];
+
+  //   if (oldCount <= 0) {
+  //     return;
+  //   }
+
+  //   const updatedCount = oldCount - 1;
+  //   const updatedIngredients = {
+  //     ...this.state.ingredients
+  //   }
+  //   updatedIngredients[type] = updatedCount;
+  //   const priceDeduction = INGREDIENT_PRICES[type];
+  //   const oldPrice = this.state.totalPrice;
+  //   const newPrice = oldPrice - priceDeduction;
+  //   this.setState({
+  //     totalPrice: newPrice,
+  //     ingredients: updatedIngredients
+  //   })
+  //   this.updatePurchaseState(updatedIngredients);
+
+  // }
   purchaseHandler = () => {
     this.setState({
       purchasing: true
@@ -76,6 +126,22 @@ class BurgerBuilder extends Component {
     this.props.history.push('/checkout');
 
 
+    // const queryParams = [];
+
+    // for (let i in this.state.ingredients) {
+    //   // console.log(encodeURIComponent(i));
+
+    //   queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+    // }
+    // queryParams.push('price=' + this.state.totalPrice);
+    // const queryString = queryParams.join('&')
+    // // console.log(queryString);
+
+    // this.props.history.push({
+    //   pathname: '/checkout',
+    //   search: '?' + queryString
+    // });
+
   }
 
 
@@ -84,6 +150,7 @@ class BurgerBuilder extends Component {
     const disabledInfo = {
       ...this.props.ingrs
     };
+    //console.log(disabledInfo);
 
     for (let key in disabledInfo) {
       disabledInfo[key] = (disabledInfo[key] <= 0);
